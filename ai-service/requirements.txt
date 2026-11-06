@@ -1,0 +1,8 @@
+﻿fastapi==0.162.0
+uvicorn[standard]==0.41.0
+pydantic==2.12.5
+PyMuPDF==1.27.2.2
+python-docx==1.2.0
+scikit-learn==1.8.0
+pytest==9.0.2
+httpx==0.28.1

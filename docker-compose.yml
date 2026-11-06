@@ -1,0 +1,76 @@
+﻿services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: hireflow
+      POSTGRES_USER: hireflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local_dev_only}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hireflow -d hireflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=hireflow;Username=hireflow;Password=${POSTGRES_PASSWORD:-local_dev_only}
+      AiService__BaseUrl: http://ai-service:8000
+      Storage__LocalPath: /app/storage
+      Storage__S3__Bucket: ${S3_BUCKET:-}
+      Storage__S3__ServiceUrl: ${S3_SERVICE_URL:-}
+      Storage__S3__Region: ${S3_REGION:-us-east-1}
+      Storage__S3__AccessKey: ${S3_ACCESS_KEY:-}
+      Storage__S3__SecretKey: ${S3_SECRET_KEY:-}
+      Storage__S3__ForcePathStyle: ${S3_FORCE_PATH_STYLE:-false}
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?Set JWT_SIGNING_KEY in .env}
+      Jwt__Issuer: HireFlow
+      Jwt__Audience: HireFlow.Client
+      Frontend__BaseUrl: http://localhost:5173
+      Smtp__Host: ${SMTP_HOST:-}
+      Smtp__Port: ${SMTP_PORT:-587}
+      Smtp__From: ${SMTP_FROM:-no-reply@hireflow.local}
+      Smtp__Username: ${SMTP_USERNAME:-}
+      Smtp__Password: ${SMTP_PASSWORD:-}
+      Smtp__EnableSsl: ${SMTP_ENABLE_SSL:-true}
+    volumes:
+      - resume_data:/app/storage
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  ai-service:
+    build:
+      context: ./ai-service
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+      - ai-service
+
+volumes:
+  postgres_data:
+  resume_data:
+
+
+
+
+
+

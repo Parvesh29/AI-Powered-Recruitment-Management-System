@@ -1,0 +1,25 @@
+﻿.app-bar { background: rgba(255,255,255,.94) !important; color: #153b31 !important; border-bottom: 1px solid #e5ece8; backdrop-filter: blur(14px); }
+.toolbar { max-width: 1200px; width: 100%; margin: auto; min-height: 72px; gap: 15px; }
+.brand { display: inline-flex; align-items: center; gap: 9px; color: #14251f; font-size: 18px; font-weight: 750; letter-spacing: -.5px; }
+.brand-mark { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 9px; color: white; background: #17735e; font-size: 15px; }
+.brand-ai { color: #168267; background: #e6f4ee; padding: 3px 6px; border-radius: 5px; font-size: 10px; letter-spacing: .3px; }
+.user-label { color: #5c7169; font-size: 13px !important; margin-right: 5px !important; }
+.page-content, .workspace-content { padding-top: 32px; }
+.hero-panel { min-height: 285px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; padding: 48px 58px; margin: 12px 0 50px; border-radius: 20px; background: radial-gradient(circle at 88% 24%, #327e69 0, transparent 31%), linear-gradient(125deg, #123c31, #17644f 68%, #174b3f); color: white; }
+.hero-panel > div:first-child { max-width: 650px; position: relative; z-index: 1; }
+.eyebrow { color: #23876c !important; font-size: 10px !important; font-weight: 750 !important; letter-spacing: 1.45px !important; margin-bottom: 8px !important; }
+.hero-panel .eyebrow { color: #b8dfd1 !important; }
+.hero-panel h1 { font-family: inherit; font-size: clamp(36px, 5vw, 55px); line-height: 1.05; font-weight: 650; letter-spacing: -2.5px; margin: 0 0 14px; }
+.hero-copy { max-width: 480px; color: #d4e8e1; line-height: 1.65; }
+.hero-orbit { width: 185px; height: 185px; margin-right: 45px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; display: grid; place-items: center; position: relative; color: rgba(255,255,255,.92); font-size: 36px; font-weight: 700; box-shadow: 0 0 0 23px rgba(255,255,255,.035), 0 0 0 48px rgba(255,255,255,.025); }
+.hero-orbit i, .hero-orbit b { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #a8dfbd; top: 18px; right: 14px; }.hero-orbit b { width: 8px; height: 8px; background: #f0d18d; top: auto; right: auto; bottom: 22px; left: 25px; }
+.listing-heading { margin-bottom: 20px; }.listing-heading h2, .workspace-heading h2, .login-card h2 { margin: 0 0 7px; color: #183b31; font-size: 26px; font-weight: 650; letter-spacing: -.8px; }
+.job-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.job-card { border: 1px solid #e5ebe7 !important; border-radius: 13px !important; background: #fff !important; transition: box-shadow .2s, transform .2s; }.job-card:hover { box-shadow: 0 12px 28px rgba(24,59,49,.08) !important; transform: translateY(-2px); }
+.job-card .MuiCardContent-root { padding: 22px; }.company-chip { background: #eff7f2 !important; color: #28765f !important; font-weight: 650 !important; }.job-title { margin: 17px 0 3px !important; color: #183b31; font-weight: 650 !important; letter-spacing: -.4px !important; }.job-company { font-size: 13px !important; }.job-description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: 58px; margin-top: 14px !important; color: #586d64; font-size: 13px !important; line-height: 1.55 !important; white-space: pre-line; }
+.empty-state { padding: 35px; text-align: center; border: 1px dashed #d8e3dc !important; background: #fbfdfb !important; }.empty-state h6 { color: #244b3f; margin-bottom: 6px; }.app-footer { padding: 35px 0 25px; margin-top: 28px; border-top: 1px solid #e6ece8; color: #829189; font-size: 12px; text-align: center; }.app-footer span { padding: 0 4px; color: #168267; }
+.login-wrap { padding-top: 70px; }.login-card { padding: 36px; border: 1px solid #e5ebe7 !important; border-radius: 16px !important; }.form-stack { display: flex; flex-direction: column; gap: 15px; }.workspace-heading { margin: 15px 0 25px; }.workspace-content { min-height: calc(100vh - 72px); }.loading { min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 14px; color: #557167; }
+.MuiInputLabel-root.MuiInputLabel-outlined.MuiInputLabel-shrink { z-index: 2 !important; padding: 0 5px !important; background-color: #fff !important; }
+.MuiDialogTitle-root { padding-top: 28px !important; }
+.MuiDialogContent-root.form-stack { padding-top: 32px !important; scroll-padding-top: 36px; }
+@media (max-width: 700px) { .hero-panel { min-height: 255px; padding: 34px 25px; margin-bottom: 34px; }.hero-orbit { display: none; }.job-grid { grid-template-columns: 1fr; }.toolbar { padding-inline: 16px !important; }.user-label { display: none; }.login-card { padding: 25px; } }
