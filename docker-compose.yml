@@ -1,4 +1,4 @@
-﻿services:
+services:
   postgres:
     image: postgres:17-alpine
     environment:
@@ -31,6 +31,7 @@
       Storage__S3__AccessKey: ${S3_ACCESS_KEY:-}
       Storage__S3__SecretKey: ${S3_SECRET_KEY:-}
       Storage__S3__ForcePathStyle: ${S3_FORCE_PATH_STYLE:-false}
+      Storage__S3__ServerSideEncryption: ${S3_SERVER_SIDE_ENCRYPTION:-true}
       Jwt__SigningKey: ${JWT_SIGNING_KEY:?Set JWT_SIGNING_KEY in .env}
       Jwt__Issuer: HireFlow
       Jwt__Audience: HireFlow.Client

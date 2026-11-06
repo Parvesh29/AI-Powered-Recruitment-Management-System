@@ -1,4 +1,4 @@
-﻿using HireFlow.Application.Authentication;
+using HireFlow.Application.Authentication;
 using HireFlow.Application.Abstractions;
 using Amazon;
 using Amazon.S3;
@@ -44,7 +44,8 @@ public static class DependencyInjection
                 ? new AmazonS3Client(s3Config)
                 : new AmazonS3Client(accessKey, secretKey, s3Config);
             services.AddSingleton(s3);
-            services.AddSingleton<IResumeFileStorage>(_ => new S3ResumeFileStorage(s3, bucket));
+            var serverSideEncryption = !bool.TryParse(configuration["Storage:S3:ServerSideEncryption"], out var configuredServerSideEncryption) || configuredServerSideEncryption;
+            services.AddSingleton<IResumeFileStorage>(_ => new S3ResumeFileStorage(s3, bucket, serverSideEncryption));
         }
         else
         {

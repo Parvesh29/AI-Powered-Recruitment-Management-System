@@ -1,15 +1,17 @@
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using HireFlow.Application.Abstractions;
 
 namespace HireFlow.Infrastructure.Storage;
 
-public sealed class S3ResumeFileStorage(IAmazonS3 client, string bucket) : IResumeFileStorage
+public sealed class S3ResumeFileStorage(IAmazonS3 client, string bucket, bool serverSideEncryption) : IResumeFileStorage
 {
     public async Task<string> SaveAsync(Guid organizationId, Guid resumeId, string extension, string contentType, Stream content, CancellationToken cancellationToken)
     {
         var key = $"{organizationId:N}/{resumeId:N}{extension}";
-        await client.PutObjectAsync(new PutObjectRequest { BucketName = bucket, Key = key, InputStream = content, ContentType = contentType, ServerSideEncryptionMethod = ServerSideEncryptionMethod.AES256, AutoCloseStream = false }, cancellationToken);
+        var request = new PutObjectRequest { BucketName = bucket, Key = key, InputStream = content, ContentType = contentType, AutoCloseStream = false };
+        if (serverSideEncryption) request.ServerSideEncryptionMethod = ServerSideEncryptionMethod.AES256;
+        await client.PutObjectAsync(request, cancellationToken);
         return key;
     }
 
